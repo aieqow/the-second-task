@@ -1,0 +1,48 @@
+#include <iostream>
+
+// Определение узла списка
+struct Node {
+    int data;       // Значение узла
+    Node* next;     // Указатель на следующий узел
+};
+
+// Добавление нового элемента в начало списка
+void push(Node** head_ref, int new_data) {
+    // Выделение памяти для нового узла
+    Node* new_node = new Node();
+    new_node->data = new_data;
+    // Новый узел указывает на текущий первый узел
+    new_node->next = (*head_ref);
+    // Обновляем указатель head
+    (*head_ref) = new_node;
+}
+
+// Вывод списка
+void printList(Node* node) {
+    while (node != nullptr) {
+        std::cout << node->data << " ";
+        node = node->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    Node* head = nullptr; // Начинаем с пустого списка
+
+    // Добавляем элементы
+    push(&head, 1);
+    push(&head, 2);
+    push(&head, 3);
+
+    // Выводим список
+    printList(head);
+
+    // Освобождение памяти (опционально)
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    return 0;
+}
