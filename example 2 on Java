@@ -1,0 +1,45 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int value) {
+        this.data = value;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    private Node head;
+
+    public LinkedList() {
+        this.head = null;  // Изначально список пуст
+    }
+
+    // Метод для вставки элемента в начало списка
+    public void insertAtBeginning(int value) {
+        Node newNode = new Node(value);  // Создаем новый узел
+        newNode.next = head;              // Новый узел указывает на старую голову
+        head = newNode;                   // Новый узел становится головой списка
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");  // Выводим данные узла
+            temp = temp.next;                    // Переходим к следующему узлу
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.insertAtBeginning(30);     // Вставляем элементы в начало списка
+        list.insertAtBeginning(20);
+        list.insertAtBeginning(10);
+
+        System.out.print("Содержимое списка: ");
+        list.display();                 // Отображаем содержимое списка
+    }
+}
