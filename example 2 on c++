@@ -1,0 +1,53 @@
+#include <iostream>
+
+struct Node {
+    int data;
+    Node* next;
+
+    Node(int value) : data(value), next(nullptr) {}
+};
+
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() : head(nullptr) {}
+
+    // Метод для вставки элемента в начало списка
+    void insertAtBeginning(int value) {
+        Node* newNode = new Node(value); // Создаем новый узел
+        newNode->next = head;            // Новый узел указывает на старую голову
+        head = newNode;                  // Новый узел становится головой списка
+    }
+
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+
+    ~LinkedList() {
+        Node* current = head;
+        while (current) {
+            Node* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+    }
+};
+
+int main() {
+    LinkedList list;
+    list.insertAtBeginning(30);       // Вставляем элементы в начало списка
+    list.insertAtBeginning(20);
+    list.insertAtBeginning(10);
+
+    std::cout << "Содержимое списка: ";
+    list.display();                   // Отображаем содержимое списка
+
+    return 0;
+}
